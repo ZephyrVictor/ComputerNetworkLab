@@ -1,0 +1,8 @@
+# 默认忽略的文件
+/../../../lab2./new/.idea/shelf/
+/../../../lab2./new/.idea/workspace.xml
+# 基于编辑器的 HTTP 客户端请求
+/../../../lab2./new/.idea/httpRequests/
+# Datasource local storage ignored files
+/../../../lab2./new/.idea/dataSources/
+/../../../lab2./new/.idea/dataSources.local.xml
