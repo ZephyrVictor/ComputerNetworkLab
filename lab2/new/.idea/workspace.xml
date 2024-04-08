@@ -7,9 +7,10 @@
     <list default="true" id="aa4fe740-6a9c-4c22-8367-34ab9181d61d" name="更改" comment="完成了第一部分 停等">
       <change beforePath="$PROJECT_DIR$/../../lab1/src/lab1" beforeDir="false" afterPath="$PROJECT_DIR$/../../lab1/src/lab1" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../lab2/new/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../lab2/new/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../lab2/new/src/main/java/ImprovedAndCSFiler/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../lab2/new/src/main/java/ImprovedAndCSFiler/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../lab2/new/src/main/java/ImprovedAndCSFiler/UDPFileTransfer.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../lab2/new/src/main/java/ImprovedAndCSFiler/UDPFileTransfer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../lab2/new/src/main/java/org/example/UDPSender.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../lab2/new/src/main/java/org/example/UDPSender.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab2/new/src/main/java/UDPSW/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../lab2/new/src/main/java/UDPSW/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab2/new/src/main/java/org/example/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../lab2/new/src/main/java/Origin/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab2/new/src/main/java/org/example/UDPSender.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../lab2/new/src/main/java/Origin/UDPSender.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab2/new/src/main/java/org/example/UDPreceiver.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../lab2/new/src/main/java/Origin/UDPreceiver.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,7 +69,7 @@
       <workItem from="1712489841607" duration="6156000" />
       <workItem from="1712551909549" duration="685000" />
       <workItem from="1712572931743" duration="8798000" />
-      <workItem from="1712581748895" duration="800000" />
+      <workItem from="1712581748895" duration="1327000" />
     </task>
     <task id="LOCAL-00001" summary="xieleyihui">
       <option name="closed" value="true" />
@@ -101,21 +102,21 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/../../lab2/new/src/main/java/org/example/UDPreceiver.java</url>
+          <url>file://$PROJECT_DIR$/../../lab2/new/src/main/java/Origin/UDPreceiver.java</url>
           <option name="timeStamp" value="13" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/../../lab2/new/src/main/java/org/example/UDPreceiver.java</url>
+          <url>file://$PROJECT_DIR$/../../lab2/new/src/main/java/Origin/UDPreceiver.java</url>
           <line>71</line>
           <option name="timeStamp" value="40" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/../../lab2/new/src/main/java/ImprovedAndCSFiler/UDPFileTransfer.java</url>
+          <url>file://$PROJECT_DIR$/../../lab2/new/src/main/java/UDPSW/UDPFileTransfer.java</url>
           <line>121</line>
           <option name="timeStamp" value="41" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/../../lab2/new/src/main/java/ImprovedAndCSFiler/UDPFileTransfer.java</url>
+          <url>file://$PROJECT_DIR$/../../lab2/new/src/main/java/UDPSW/UDPFileTransfer.java</url>
           <line>173</line>
           <option name="timeStamp" value="42" />
         </line-breakpoint>
