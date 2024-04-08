@@ -10,7 +10,7 @@ import java.util.Properties;
 import java.util.stream.Collectors;
 
 public class UDPreceiver {
-    private static final int PORT = 1234;
+    public static int PORT = 1234;
     private static int packetCount = 0;
     private static int expectedSequenceNumber = 0;
 
@@ -34,7 +34,7 @@ public class UDPreceiver {
                 if (receivedData.startsWith("SEQ:")) {
                     String[] parts = receivedData.split(":", 5);
                     int sequenceNumber = Integer.parseInt(parts[1]);
-                    String recData = parts[4]; // 假设数据立即跟随长度信息
+                    String recData = parts[4]; //
 
                     if (sequenceNumber == expectedSequenceNumber) {
                         packetCount++;

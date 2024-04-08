@@ -4,10 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="aa4fe740-6a9c-4c22-8367-34ab9181d61d" name="更改" comment="xieleyihui">
-      <change afterPath="$PROJECT_DIR$/../../lab2/new/src/main/resources/application.properties" afterDir="false" />
+    <list default="true" id="aa4fe740-6a9c-4c22-8367-34ab9181d61d" name="更改" comment="完成了第一部分 停等">
+      <change afterPath="$PROJECT_DIR$/../../lab2/new/src/main/java/ImprovedAndCSFiler/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lab2/new/src/main/java/ImprovedAndCSFiler/UDPFileTransfer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../lab1/src/lab1" beforeDir="false" afterPath="$PROJECT_DIR$/../../lab1/src/lab1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab2/new/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../lab2/new/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab2/new/src/main/java/org/example/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../lab2/new/src/main/java/org/example/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../lab2/new/src/main/java/org/example/UDPSender.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../lab2/new/src/main/java/org/example/UDPSender.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab2/new/src/main/java/org/example/UDPreceiver.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../lab2/new/src/main/java/org/example/UDPreceiver.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,20 +36,28 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;configurable.group.editor&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "main",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "project.structure.last.edited": "模块",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "configurable.group.editor",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="org.example" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="应用程序级" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="默认任务">
@@ -55,7 +67,9 @@
       <option name="presentableId" value="Default" />
       <updated>1712481717172</updated>
       <workItem from="1712481718169" duration="2072000" />
-      <workItem from="1712489841607" duration="5946000" />
+      <workItem from="1712489841607" duration="6156000" />
+      <workItem from="1712551909549" duration="685000" />
+      <workItem from="1712572931743" duration="7785000" />
     </task>
     <task id="LOCAL-00001" summary="xieleyihui">
       <option name="closed" value="true" />
@@ -65,7 +79,15 @@
       <option name="project" value="LOCAL" />
       <updated>1712483576310</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="完成了第一部分 停等">
+      <option name="closed" value="true" />
+      <created>1712498271294</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1712498271294</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -73,7 +95,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="xieleyihui" />
-    <option name="LAST_COMMIT_MESSAGE" value="xieleyihui" />
+    <MESSAGE value="完成了第一部分 停等" />
+    <option name="LAST_COMMIT_MESSAGE" value="完成了第一部分 停等" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -83,14 +106,19 @@
           <option name="timeStamp" value="13" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/../../lab2/new/src/main/java/org/example/UDPreceiver.java</url>
-          <line>70</line>
-          <option name="timeStamp" value="21" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/../../lab2/new/src/main/java/org/example/UDPSender.java</url>
           <line>95</line>
           <option name="timeStamp" value="22" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/../../lab2/new/src/main/java/org/example/UDPSender.java</url>
+          <line>56</line>
+          <option name="timeStamp" value="31" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/../../lab2/new/src/main/java/ImprovedAndCSFiler/UDPFileTransfer.java</url>
+          <line>50</line>
+          <option name="timeStamp" value="39" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

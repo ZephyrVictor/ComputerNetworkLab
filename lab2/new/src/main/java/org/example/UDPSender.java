@@ -14,9 +14,9 @@ public class UDPSender {
     // 规定一次传输包的最大大小
     private static final int MAX_PACKET_SIZE = 128;
     // 规定host
-    private static final String HOST = "localhost";
-    // 规定端口
-    private static final int PORT = 1234;
+    public static final String HOST = "localhost";
+    // 规定端口,destination是1234
+    public static int PORT = 1234;
 
     public static void main(String[] args) throws Exception {
         try (DatagramSocket socket = new DatagramSocket()) {
