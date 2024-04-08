@@ -102,9 +102,9 @@ public class UDPSender {
 
                     if (ackMsg.equals("ACK:" + sequenceNumber)) {
                         System.out.println("收到ACK " + sequenceNumber);
+                        tryCounter = 0;
                         sequenceNumber++;
                         ackReceived = true;
-                        tryCounter = 0;
                         break; // 跳出等待ACK的循环
                     }
                 } catch (Exception e) {
