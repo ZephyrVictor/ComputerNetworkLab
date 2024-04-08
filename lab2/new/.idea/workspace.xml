@@ -5,12 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="aa4fe740-6a9c-4c22-8367-34ab9181d61d" name="更改" comment="完成了第一部分 停等">
+      <change afterPath="$PROJECT_DIR$/../../lab2/new/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lab2/new/src/main/java/CSfile/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lab2/new/src/main/java/CSfile/UDPFileReceiver.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../lab2/new/src/main/java/CSfile/UDPSender.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../lab1/src/lab1" beforeDir="false" afterPath="$PROJECT_DIR$/../../lab1/src/lab1" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../lab2/new/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../lab2/new/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../lab2/new/src/main/java/UDPSW/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../lab2/new/src/main/java/UDPSW/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../lab2/new/src/main/java/org/example/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../lab2/new/src/main/java/Origin/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../lab2/new/src/main/java/org/example/UDPSender.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../lab2/new/src/main/java/Origin/UDPSender.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../lab2/new/src/main/java/org/example/UDPreceiver.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../lab2/new/src/main/java/Origin/UDPreceiver.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,23 +35,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;模块&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;configurable.group.editor&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "main",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "project.structure.last.edited": "模块",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "configurable.group.editor",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="org.example" />
@@ -69,7 +70,8 @@
       <workItem from="1712489841607" duration="6156000" />
       <workItem from="1712551909549" duration="685000" />
       <workItem from="1712572931743" duration="8798000" />
-      <workItem from="1712581748895" duration="1327000" />
+      <workItem from="1712581748895" duration="1589000" />
+      <workItem from="1712587657191" duration="4705000" />
     </task>
     <task id="LOCAL-00001" summary="xieleyihui">
       <option name="closed" value="true" />
@@ -119,6 +121,16 @@
           <url>file://$PROJECT_DIR$/../../lab2/new/src/main/java/UDPSW/UDPFileTransfer.java</url>
           <line>173</line>
           <option name="timeStamp" value="42" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/../../lab2/new/src/main/java/CSfile/UDPSender.java</url>
+          <line>89</line>
+          <option name="timeStamp" value="49" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/../../lab2/new/src/main/java/CSfile/UDPFileReceiver.java</url>
+          <line>52</line>
+          <option name="timeStamp" value="50" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
