@@ -7,6 +7,8 @@ import SR.thread.AcceptAck;
 import SR.thread.OutPut;
 import SR.thread.timeOut;
 
+import java.io.IOException;
+import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.SocketException;
@@ -34,6 +36,24 @@ public class Sender {
         new AcceptAck(senderSocket, baseNum, buffer).start();
         // 超时检查
         new timeOut(buffer, senderSocket, timeLim).start();
+        // 新增：接收数据线程
+        Thread receiveThread = new Thread(() -> {
+            try {
+                while (true) {
+                    DatagramPacket responsePacket = new DatagramPacket(new byte[1024], 1024);
+                    senderSocket.receive(responsePacket);
+                    String responseData = new String(responsePacket.getData(), 0, responsePacket.getLength());
+                    System.out.println("Received from receiver: " + responseData);
+                    // 处理接收到的数据，例如打印日志或进行逻辑处理
+                }
+            } catch (IOException e) {
+                System.err.println("Sender receive error: " + e.getMessage());
+                e.printStackTrace();
+            }
+        });
+
+        // 启动接收数据线程
+        receiveThread.start();
     }
 
 

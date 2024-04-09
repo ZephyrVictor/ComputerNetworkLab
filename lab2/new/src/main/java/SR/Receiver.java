@@ -10,6 +10,7 @@ import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.SocketException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -20,8 +21,8 @@ public class Receiver {
     private static int base = 0;
 
     private static int port = 1235; // 对面的端口
-    private static double lossRate = 0.8; // 丢包率，例如0.1表示10%的概率丢包
-    public static void main(String[] args) throws IOException {
+    private static double lossRate = 0.2; // 丢包率，例如0.1表示10%的概率丢包
+    public static void main(String[] args) throws IOException, InterruptedException {
         DatagramSocket receiver=new DatagramSocket(1234);
         List<cache2> buffer=new ArrayList<>();//接收方缓存
         BaseNum baseNum=new BaseNum(base);
@@ -31,7 +32,7 @@ public class Receiver {
             System.out.println("接收窗口:" + baseNum.baseNum);
             DatagramPacket packet = new DatagramPacket(new byte[1024], 1024);
             receiver.receive(packet);
-            String newData=new String(packet.getData());
+            String newData = new String(packet.getData(), 0, packet.getLength());
             int seqNum=Integer.parseInt(newData.split(":")[0]);
 
             if(random.nextDouble() > lossRate){//不丢包
@@ -41,6 +42,10 @@ public class Receiver {
                     String ack = seqNum + ":ACK";
                     DatagramPacket ACK = new DatagramPacket(ack.getBytes(),ack.getBytes().length, InetAddress.getByName("localhost"),port);
                     receiver.send(ACK);
+                    // 向发送方回传接收到的数据
+                    DatagramPacket responsePacket = new DatagramPacket(newData.getBytes(), newData.getBytes().length, InetAddress.getByName("localhost"), port);
+                    receiver.send(responsePacket); // 回传数据
+                    System.out.println("Responded with same data to sender: " + newData);
                 }
                 //
                 else if(seqNum >= baseNum.baseNum && seqNum <= baseNum.baseNum+sizeOfWindows){
@@ -48,7 +53,12 @@ public class Receiver {
                     String ack = seqNum + ":ACK";
                     DatagramPacket ACK = new DatagramPacket(ack.getBytes(),ack.getBytes().length, InetAddress.getByName("localhost"),port);
                     receiver.send(ACK);
+                    String receivedData = Arrays.toString(packet.getData());
                     buffer.add(new cache2(seqNum,packet));
+                    // 向发送方回传接收到的数据
+                    DatagramPacket responsePacket = new DatagramPacket(receivedData.getBytes(), receivedData.getBytes().length, InetAddress.getByName("localhost"), port);
+                    receiver.send(responsePacket); // 回传数据
+                    System.out.println("Responded with same data to sender: " + receivedData);
                 }
                 else {
                     System.out.println("序列号不在接受范围内，等会...");
@@ -69,6 +79,7 @@ public class Receiver {
                     }
                 }
             }
+            Thread.sleep(100);//yanchi
             // 模拟向上层交付
             new Deliver(buffer,baseNum).start();
         }
