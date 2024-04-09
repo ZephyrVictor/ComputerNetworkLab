@@ -11,6 +11,7 @@ import java.net.InetAddress;
 import java.net.SocketException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 
 public class Receiver {
@@ -19,10 +20,12 @@ public class Receiver {
     private static int base = 0;
 
     private static int port = 1235; // 对面的端口
+    private static double lossRate = 0.8; // 丢包率，例如0.1表示10%的概率丢包
     public static void main(String[] args) throws IOException {
         DatagramSocket receiver=new DatagramSocket(1234);
         List<cache2> buffer=new ArrayList<>();//接收方缓存
         BaseNum baseNum=new BaseNum(base);
+        Random random = new Random(); // 用于生成随机数，判断是否丢包
         System.out.println("接收，启动");
         while(true){
             System.out.println("接收窗口:" + baseNum.baseNum);
@@ -31,24 +34,30 @@ public class Receiver {
             String newData=new String(packet.getData());
             int seqNum=Integer.parseInt(newData.split(":")[0]);
 
-            //收到了小于baseNum的 发送目前最小的ack 不缓存
-            if(seqNum < baseNum.baseNum){
-                System.out.println("接收到的序列号:" + seqNum + "数据为:" + newData);
-                String ack = seqNum + ":ACK";
-                DatagramPacket ACK = new DatagramPacket(ack.getBytes(),ack.getBytes().length, InetAddress.getByName("localhost"),port);
-                receiver.send(ACK);
+            if(random.nextDouble() > lossRate){//不丢包
+                //收到了小于baseNum的 发送目前最小的ack 不缓存
+                if(seqNum < baseNum.baseNum){
+                    System.out.println("接收到的序列号:" + seqNum + "数据为:" + newData);
+                    String ack = seqNum + ":ACK";
+                    DatagramPacket ACK = new DatagramPacket(ack.getBytes(),ack.getBytes().length, InetAddress.getByName("localhost"),port);
+                    receiver.send(ACK);
+                }
+                //
+                else if(seqNum >= baseNum.baseNum && seqNum <= baseNum.baseNum+sizeOfWindows){
+                    System.out.println("接收到的序列号:" + seqNum + "数据为:" + newData);
+                    String ack = seqNum + ":ACK";
+                    DatagramPacket ACK = new DatagramPacket(ack.getBytes(),ack.getBytes().length, InetAddress.getByName("localhost"),port);
+                    receiver.send(ACK);
+                    buffer.add(new cache2(seqNum,packet));
+                }
+                else {
+                    System.out.println("序列号不在接受范围内，等会...");
+                }
             }
-            //
-            else if(seqNum >= baseNum.baseNum && seqNum <= baseNum.baseNum+sizeOfWindows){
-                System.out.println("接收到的序列号:" + seqNum + "数据为:" + newData);
-                String ack = seqNum + ":ACK";
-                DatagramPacket ACK = new DatagramPacket(ack.getBytes(),ack.getBytes().length, InetAddress.getByName("localhost"),port);
-                receiver.send(ACK);
-                buffer.add(new cache2(seqNum,packet));
+            else{//丢包
+                System.out.println("模拟丢包，不发送ACK:" + seqNum);
             }
-            else {
-                System.out.println("序列号不在接受范围内，等会...");
-            }
+
             //将缓存中的packet按序列号升序排列 冒泡排序就行
             for(int i=0;i<buffer.size()-1;i++){
                 for(int j=0;j< buffer.size()-1-i;j++){

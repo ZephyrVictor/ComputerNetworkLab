@@ -5,19 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="aa4fe740-6a9c-4c22-8367-34ab9181d61d" name="更改" comment="完成了第一部分 停等">
-      <change afterPath="$PROJECT_DIR$/../../lab2/new/src/main/java/SR/Receiver.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../lab2/new/src/main/java/SR/Sender.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../lab2/new/src/main/java/SR/entity/BaseNum.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../lab2/new/src/main/java/SR/entity/NextSec.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../lab2/new/src/main/java/SR/entity/cache.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../lab2/new/src/main/java/SR/entity/cache2.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../lab2/new/src/main/java/SR/thread/AcceptAck.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../lab2/new/src/main/java/SR/thread/Deliver.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../lab2/new/src/main/java/SR/thread/OutPut.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../lab2/new/src/main/java/SR/thread/Timer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../../lab2/new/src/main/java/SR/thread/timeOut.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../lab1/src/lab1" beforeDir="false" afterPath="$PROJECT_DIR$/../../lab1/src/lab1" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../lab2/new/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../lab2/new/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab2/new/src/main/java/SR/Receiver.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../lab2/new/src/main/java/SR/Receiver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab2/new/src/main/java/SR/thread/OutPut.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../lab2/new/src/main/java/SR/thread/OutPut.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -83,6 +74,7 @@
       <workItem from="1712581748895" duration="1589000" />
       <workItem from="1712587657191" duration="4732000" />
       <workItem from="1712673327627" duration="4384000" />
+      <workItem from="1712677726335" duration="1410000" />
     </task>
     <task id="LOCAL-00001" summary="xieleyihui">
       <option name="closed" value="true" />
