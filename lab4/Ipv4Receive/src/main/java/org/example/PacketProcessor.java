@@ -1,5 +1,6 @@
 package org.example;// author Zephyr369 
 
+import org.pcap4j.core.NotOpenException;
 import org.pcap4j.core.PcapHandle;
 import org.pcap4j.core.PcapNativeException;
 import org.pcap4j.core.Pcaps;
@@ -9,6 +10,7 @@ import org.pcap4j.packet.Packet;
 import org.pcap4j.util.ByteArrays;
 
 import java.io.EOFException;
+import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
@@ -23,28 +25,38 @@ public class PacketProcessor {
         }
     }
 
-    public void processPcapFile(String fileName) throws PcapNativeException {
-        try(PcapHandle handle = Pcaps.openOffline(fileName)){
-            while(1){
-                try{
-                    Packet packet = handle.getNextPacket();
-                    IpV4Packet ipv4Packet = packet.get(IpV4Packet.class);//拿到ipv4分组
-                    if(ipv4Packet != null){
-                        String validationResult = validateIpV4Packet(ipv4Packet);
+    public void processPcapFile(String filename,int SerialNumber) {
+        try (PcapHandle handle = Pcaps.openOffline(filename)) {
+            Packet packet;
+            while (true) {
+                packet = handle.getNextPacket();
+                if (packet == null) {
+                    break; // No more packets, end the loop
+                }
+
+                try {
+                    IpV4Packet ipv4Packet = packet.get(IpV4Packet.class);
+                    if (ipv4Packet != null) {
+                        String validationResult = validateIpV4Packet(ipv4Packet,SerialNumber);
                         System.out.println(validationResult);
                     }
-                } catch(Exception e){
-                    System.out.println("Error:" + e.getMessage());
+                } catch (IllegalArgumentException e) {
+                    System.out.println("Malformed packet error: " + e.getMessage());
+                } catch (Exception e) {
+                    System.out.println("Unexpected error processing packet: " + e.getMessage());
                 }
             }
-        } catch(Exception e){
-            System.out.println("Error" + e.getMessage());
+        } catch (PcapNativeException e) {
+            System.out.println("Error opening pcap file: " + e.getMessage());
+        } catch (NotOpenException e) {
+            System.out.println("IO error reading pcap file: " + e.getMessage());
         }
-
     }
 
-    private String validateIpV4Packet(IpV4Packet ipv4Packet) {
+    private String validateIpV4Packet(IpV4Packet ipv4Packet,int SerialNumber) {
         StringBuilder result = new StringBuilder();
+        result.append(String.format("序号为%s的包：",SerialNumber));
+        int length = result.length();
 
         //版本检查
         if(ipv4Packet.getHeader().getVersion().value() != 4){
@@ -71,7 +83,7 @@ public class PacketProcessor {
             result.append("错误目标地址 ");
         }
 
-        if (result.length() == 0) {
+        if (result.length() == length) {
             return "正确";
         } else {
             return result.toString().trim();
@@ -104,4 +116,22 @@ public class PacketProcessor {
         return result;
     }
 
+
+//    private boolean isChecksumCorrect(IpV4Packet ipv4Packet) {
+//        ByteBuffer buffer = ByteBuffer.wrap(ipv4Packet.getRawData());
+//        int headerLength = ipv4Packet.getHeader().getIhlAsInt() * 4;
+//        short originalChecksum = buffer.getShort(10);
+//        buffer.putShort(10, (short) 0);
+//
+//        int accumulation = 0;
+//        for (int i = 0; i < headerLength; i += 2) {
+//            accumulation += Short.toUnsignedInt(buffer.getShort(i));
+//        }
+//
+//        accumulation = (accumulation >> 16) + (accumulation & 0xFFFF);
+//        accumulation += (accumulation >> 16);
+//        short calculatedChecksum = (short) ~accumulation;
+//
+//        return originalChecksum == calculatedChecksum;
+//    }
 }
