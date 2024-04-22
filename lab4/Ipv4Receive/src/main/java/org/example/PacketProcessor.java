@@ -60,12 +60,12 @@ public class PacketProcessor {
 
         //版本检查
         if(ipv4Packet.getHeader().getVersion().value() != 4){
-            result.append("版本号错误");
+            result.append("版本号错误 ");
         }
 
         //长度 四个byte一个单位
         if(ipv4Packet.getHeader().getTotalLengthAsInt() * 4 < 20){
-            result.append("头部长度错误");
+            result.append("头部长度错误 ");
         }
 
         // TTL
@@ -102,17 +102,30 @@ public class PacketProcessor {
 
         //计算校验和
         int checkSum = 0;
-        for(int i = 0; i < header.length ; i += 2){
-            checkSum += ByteArrays.getShort(header, i) &0xffff;
+//        for(int i = 0; i < header.length ; i += 2){
+//            checkSum += ByteArrays.getShort(header, i) &0xffff;
+//        }
+//        // 处理溢出
+//        checkSum = (checkSum >> 16) + (checkSum & 0xffff);
+//        checkSum += (checkSum >> 16);
+//        checkSum = ~checkSum & 0xffff;
+//
+//        if(checkSum == ByteArrays.getShort(rawData, 10)){
+//            result = true;
+//        }
+        for(int i = 0 ; i < headerLength; i+= 2){
+            int word = (((header[i] << 8) & 0xFF00) | header[i+1] & 0xFF);
+            checkSum += word;
+            if((checkSum & 0xFFFF0000) != 0){
+                checkSum &= 0xFFFF; // 高位清零
+                checkSum++;
+            }
         }
-
-        checkSum = (checkSum >> 16) + (checkSum & 0xffff);
-        checkSum += (checkSum >> 16);
-        checkSum = ~checkSum & 0xffff;
-
+        checkSum = (~checkSum) & 0xFFFF;
         if(checkSum == ByteArrays.getShort(rawData, 10)){
             result = true;
         }
+
 
         return result;
     }
