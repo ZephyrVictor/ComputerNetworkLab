@@ -7,8 +7,9 @@
     <list default="true" id="aa4fe740-6a9c-4c22-8367-34ab9181d61d" name="更改" comment="完成了第一部分 停等">
       <change beforePath="$PROJECT_DIR$/../../lab1/src/lab1" beforeDir="false" afterPath="$PROJECT_DIR$/../../lab1/src/lab1" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../lab2/new/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../lab2/new/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../lab2/new/src/main/java/SR/Receiver.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../lab2/new/src/main/java/SR/Receiver.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../../lab2/new/src/main/java/SR/Sender.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../lab2/new/src/main/java/SR/Sender.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab2/new/img/recv/received_file.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab2/new/src/main/java/SR/thread/OutPut.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../lab2/new/src/main/java/SR/thread/OutPut.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../lab2/new/src/main/java/UDPSW/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../lab2/new/src/main/java/UDPSW/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,6 +41,7 @@
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;E:/studying/2/下/计算机网络/HIT_network_lab2-java--main/HIT_network_lab2&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -74,7 +76,12 @@
       <workItem from="1712581748895" duration="1589000" />
       <workItem from="1712587657191" duration="4732000" />
       <workItem from="1712673327627" duration="4384000" />
-      <workItem from="1712677726335" duration="2213000" />
+      <workItem from="1712677726335" duration="2377000" />
+      <workItem from="1712725463713" duration="119000" />
+      <workItem from="1712745147899" duration="6243000" />
+      <workItem from="1712753512016" duration="163000" />
+      <workItem from="1712754097500" duration="586000" />
+      <workItem from="1713713520730" duration="36000" />
     </task>
     <task id="LOCAL-00001" summary="xieleyihui">
       <option name="closed" value="true" />
@@ -132,8 +139,13 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/../../lab2/new/src/main/java/CSfile/UDPFileReceiver.java</url>
-          <line>52</line>
-          <option name="timeStamp" value="50" />
+          <line>42</line>
+          <option name="timeStamp" value="51" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/../../lab2/new/src/main/java/SR/Receiver.java</url>
+          <line>45</line>
+          <option name="timeStamp" value="52" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
