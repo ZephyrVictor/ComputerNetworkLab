@@ -19,7 +19,7 @@ public class PacketProcessor {
 
     static {
         try {
-            LOCAL_ADDRESS = InetAddress.getByName("192.168.214.138");
+            LOCAL_ADDRESS = InetAddress.getByName("192.168.214.1");
         } catch (UnknownHostException e) {
             throw new RuntimeException("Failed to initialize local IP address", e);
         }
@@ -81,6 +81,7 @@ public class PacketProcessor {
         // 目标地址
         if (!ipv4Packet.getHeader().getDstAddr().equals(LOCAL_ADDRESS)) {
             result.append("错误目标地址 ");
+//            System.out.println("ip" + ipv4Packet.getHeader().getDstAddr());
         }
 
         if (result.length() == length) {
@@ -118,20 +119,31 @@ public class PacketProcessor {
 
 
 //    private boolean isChecksumCorrect(IpV4Packet ipv4Packet) {
-//        ByteBuffer buffer = ByteBuffer.wrap(ipv4Packet.getRawData());
-//        int headerLength = ipv4Packet.getHeader().getIhlAsInt() * 4;
-//        short originalChecksum = buffer.getShort(10);
-//        buffer.putShort(10, (short) 0);
+//        byte[] header = ipv4Packet.getHeader().getRawData();
+//        int headerLength = ipv4Packet.getHeader().getIhlAsInt() * 4; // IHL 字段指示的头部长度
 //
-//        int accumulation = 0;
+//        // 确保校验和字段为0
+//        header[10] = 0;
+//        header[11] = 0;
+//
+//        int sum = 0;
 //        for (int i = 0; i < headerLength; i += 2) {
-//            accumulation += Short.toUnsignedInt(buffer.getShort(i));
+//            // 将两个字节组合成一个16位整数
+//            int word = ((header[i] << 8) & 0xFF00) | (header[i + 1] & 0xFF);
+//            sum += word;
+//
+//            // 检查溢出
+//            if ((sum & 0xFFFF0000) != 0) {
+//                sum &= 0xFFFF;
+//                sum++;
+//            }
 //        }
 //
-//        accumulation = (accumulation >> 16) + (accumulation & 0xFFFF);
-//        accumulation += (accumulation >> 16);
-//        short calculatedChecksum = (short) ~accumulation;
+//        // 取反操作得到校验和
+//        sum = ~sum;
+//        sum = sum & 0xFFFF;
 //
-//        return originalChecksum == calculatedChecksum;
+//        // 检查计算出的校验和是否为0
+//        return sum == 0;
 //    }
 }
