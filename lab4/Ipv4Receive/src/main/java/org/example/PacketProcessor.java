@@ -10,7 +10,9 @@ import org.pcap4j.packet.Packet;
 import org.pcap4j.util.ByteArrays;
 
 import java.io.EOFException;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
@@ -19,7 +21,7 @@ public class PacketProcessor {
 
     static {
         try {
-            LOCAL_ADDRESS = InetAddress.getByName("192.168.214.1");
+            LOCAL_ADDRESS = InetAddress.getByName("192.168.110.138");
         } catch (UnknownHostException e) {
             throw new RuntimeException("Failed to initialize local IP address", e);
         }
@@ -39,6 +41,7 @@ public class PacketProcessor {
                     if (ipv4Packet != null) {
                         String validationResult = validateIpV4Packet(ipv4Packet,SerialNumber);
                         System.out.println(validationResult);
+                        appendToFile(validationResult);
                     }
                 } catch (IllegalArgumentException e) {
                     System.out.println("Malformed packet error: " + e.getMessage());
@@ -53,44 +56,37 @@ public class PacketProcessor {
         }
     }
 
-    private String validateIpV4Packet(IpV4Packet ipv4Packet,int SerialNumber) {
-        StringBuilder result = new StringBuilder();
-        result.append(String.format("序号为%s的包：",SerialNumber));
-        int length = result.length();
+    private String validateIpV4Packet(IpV4Packet ipv4Packet, int serialNumber) {
 
-        //版本检查
-        if(ipv4Packet.getHeader().getVersion().value() != 4){
-            result.append("版本号错误 ");
-        }
 
-        //长度 四个byte一个单位
-        if(ipv4Packet.getHeader().getTotalLengthAsInt() * 4 < 20){
-            result.append("头部长度错误 ");
-        }
-
-        // TTL
+        // TTL检查
         if (ipv4Packet.getHeader().getTtlAsInt() == 0) {
-            result.append("TTL错 ");
+            return "TTL错";
         }
 
-        // 校验和
+        // 版本号检查
+        if (ipv4Packet.getHeader().getVersion().value() != 4) {
+            return "版本号错";
+        }
+
+        // IP头部长度检查
+        if (ipv4Packet.getHeader().getIhlAsInt() * 4 < 20) {
+            return "头部长度错";
+        }
+
+// 校验和检查
         if (!isChecksumCorrect(ipv4Packet)) {
-            result.append("校验和错 ");
+            return "校验和错";
         }
 
-        // 目标地址
+        // 目标地址检查
         if (!ipv4Packet.getHeader().getDstAddr().equals(LOCAL_ADDRESS)) {
-            result.append("错误目标地址 ");
-//            System.out.println("ip" + ipv4Packet.getHeader().getDstAddr());
+            return "错误目标地址";
         }
 
-        if (result.length() == length) {
-            return "正确";
-        } else {
-            return result.toString().trim();
-        }
+        // 如果所有检查都通过，则认为数据包是正确的
+        return "正确";
     }
-
     private boolean isChecksumCorrect(IpV4Packet ipv4Packet){
         boolean result = false;
         byte[] rawData = ipv4Packet.getRawData();
@@ -128,6 +124,15 @@ public class PacketProcessor {
 
 
         return result;
+    }
+
+    private void appendToFile(String text){
+        try(FileWriter fw = new FileWriter("D:/2022111915/result1.txt", true)){
+            PrintWriter out = new PrintWriter(fw);
+            out.println(text);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 

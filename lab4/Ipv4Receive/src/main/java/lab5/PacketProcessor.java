@@ -6,6 +6,9 @@ import org.pcap4j.packet.IpV4Packet;
 import org.pcap4j.packet.Packet;
 import org.pcap4j.util.ByteArrays;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.InetAddress;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -26,7 +29,7 @@ public class PacketProcessor {
     //初始化
     static {
         try {
-            LOCAL_ADDRESS = InetAddress.getByName("192.168.214.138");
+            LOCAL_ADDRESS = InetAddress.getByName("192.168.110.138");
             initializeRoutingTable();
         } catch (Exception e) {
             throw new RuntimeException("Failed to initialize local IP address or routing table", e);
@@ -60,6 +63,7 @@ public class PacketProcessor {
                         // 验证逻辑
                         String validationResult = validateIpV4Packet(ipv4Packet, serialNumber);
                         System.out.println(validationResult);
+                        appendToFile(validationResult);
                     }
                 } catch (Exception e) {
                     System.out.println("Error processing packet: " + e.getMessage());
@@ -70,50 +74,43 @@ public class PacketProcessor {
         }
     }
     private String validateIpV4Packet(IpV4Packet ipv4Packet, int serialNumber) throws IllegalRawDataException {
-        StringBuilder result = new StringBuilder();
-        result.append(String.format("序列号为%d的包：",serialNumber));
-        boolean hasError = false;
-        if (ipv4Packet.getHeader().getVersion().value() != 4) {
-            result.append("版本号错误 ");
-            hasError = true;
-        }
 
-        if (ipv4Packet.getHeader().getIhlAsInt() * 4 < 20) {
-            result.append("头部长度错误 ");
-            hasError = true;
-        }
 
+        // TTL错误检查
         if (ipv4Packet.getHeader().getTtlAsInt() == 0) {
-            result.append("TTL错 ");
-            hasError = true;
+            return "TTL错 丢弃";
         }
 
+        // 版本号错误检查
+        if (ipv4Packet.getHeader().getVersion().value() != 4) {
+            return "版本号错 丢弃";
+        }
+
+        // 头部长度错误检查
+        if (ipv4Packet.getHeader().getIhlAsInt() * 4 < 20) {
+            return "头部长度错 丢弃";
+        }
+
+// 校验和错误检查
         if (!isChecksumCorrect(ipv4Packet)) {
-            result.append("校验和错 ");
-            hasError = true;
+            return "校验和错 丢弃";
         }
 
-        String dstAddr = ipv4Packet.getHeader().getDstAddr().toString().substring(1);
+        // 目标地址错误检查
+        String dstAddr = ipv4Packet.getHeader().getDstAddr().toString().substring(1);  // 移除地址前的'/'
         if (!dstAddr.equals(LOCAL_ADDRESS.getHostAddress()) && !routingTable.contains(dstAddr)) {
-            result.append("错误目标地址 ");
-            hasError = true;
+            return "错误目标地址 丢弃";
         }
 
-        if (!hasError) {
-            if (routingTable.contains(dstAddr)) {
-                IpV4Packet newPacket = modifyIpPacket(ipv4Packet);
-                result.append(String.format("转发 新TTL=%d 新校验和=0x%X", newPacket.getHeader().getTtlAsInt(), newPacket.getHeader().getHeaderChecksum()));
-                // 测试 检查校验和计算算法
-                String test = String.valueOf(isChecksumCorrect(newPacket));
-            } else {
-                result.append("正确 接收");
-            }
+        // 如果所有检查都通过，则根据目标地址转发或接收
+        if (routingTable.contains(dstAddr)) {
+            IpV4Packet newPacket = modifyIpPacket(ipv4Packet);
+            return String.format("转发 %d 0x%x", newPacket.getHeader().getTtlAsInt(), newPacket.getHeader().getHeaderChecksum());
         } else {
-            result.append(" 丢弃");
+            return "正确 接收";
         }
-
-        return result.toString().trim();
     }
+
     private IpV4Packet modifyIpPacket(IpV4Packet originalPacket) throws IllegalRawDataException {
         byte[] rawData = originalPacket.getRawData();
         int headerLength = originalPacket.getHeader().getIhlAsInt() * 4;
@@ -193,6 +190,13 @@ public class PacketProcessor {
 
         return result;
     }
-
+    private void appendToFile(String text){
+        try(FileWriter fw = new FileWriter("D:/2022111915/result2.txt", true)){
+            PrintWriter out = new PrintWriter(fw);
+            out.println(text);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
 }
