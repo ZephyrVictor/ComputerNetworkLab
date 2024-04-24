@@ -43,6 +43,11 @@ public class PacketProcessor {
                         System.out.println(validationResult);
                         appendToFile(validationResult);
                     }
+                    else{
+                        String validationResult = "头部长度错";
+                        System.out.println("头部长度错");
+                        appendToFile(validationResult);
+                    }
                 } catch (IllegalArgumentException e) {
                     System.out.println("Malformed packet error: " + e.getMessage());
                 } catch (Exception e) {
@@ -57,7 +62,7 @@ public class PacketProcessor {
     }
 
     private String validateIpV4Packet(IpV4Packet ipv4Packet, int serialNumber) {
-
+        System.out.println(serialNumber);
 
         // TTL检查
         if (ipv4Packet.getHeader().getTtlAsInt() == 0) {
@@ -70,7 +75,7 @@ public class PacketProcessor {
         }
 
         // IP头部长度检查
-        if (ipv4Packet.getHeader().getIhlAsInt() * 4 < 20) {
+        if (ipv4Packet.getHeader().getIhlAsInt() * 4 != 20) {
             return "头部长度错";
         }
 
@@ -118,7 +123,8 @@ public class PacketProcessor {
             }
         }
         checkSum = (~checkSum) & 0xFFFF;
-        if(checkSum == ByteArrays.getShort(rawData, 10)){
+        int originSum = ((rawData[10] & 0xFF) << 8) | (rawData[11] & 0xFF);
+        if(checkSum==originSum){
             result = true;
         }
 
@@ -127,7 +133,7 @@ public class PacketProcessor {
     }
 
     private void appendToFile(String text){
-        try(FileWriter fw = new FileWriter("D:/2022111915/result1.txt", true)){
+        try(FileWriter fw = new FileWriter("D:/2022111905/result1.txt", true)){
             PrintWriter out = new PrintWriter(fw);
             out.println(text);
         } catch (IOException e) {

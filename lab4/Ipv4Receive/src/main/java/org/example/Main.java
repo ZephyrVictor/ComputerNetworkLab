@@ -12,7 +12,7 @@ public class Main {
         PacketProcessor processor = new PacketProcessor();
         clearFile();
         for (int i = 0 ; i < 100 ; i++){
-            String filename = String.format("D:/2022111915/pro%s.pcap",i);
+            String filename = String.format("D:/2022111905/pro%s.pcap",i);
             processor.processPcapFile(filename,i);
 
         }
@@ -20,7 +20,7 @@ public class Main {
 //        processor.processPcapFile(filename,i);
     }
     private static void clearFile(){
-        try(FileWriter fw = new FileWriter("D:/2022111915/result1.txt")) {
+        try(FileWriter fw = new FileWriter("D:/2022111905/result1.txt")) {
             fw.write("");
         } catch (IOException e) {
             throw new RuntimeException(e);

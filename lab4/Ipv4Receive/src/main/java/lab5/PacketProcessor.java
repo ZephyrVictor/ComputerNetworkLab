@@ -65,6 +65,11 @@ public class PacketProcessor {
                         System.out.println(validationResult);
                         appendToFile(validationResult);
                     }
+                    else{
+                        String validationResult = "头部长度错 丢弃";
+                        System.out.println(validationResult);
+                        appendToFile(validationResult);
+                    }
                 } catch (Exception e) {
                     System.out.println("Error processing packet: " + e.getMessage());
                 }
@@ -87,7 +92,7 @@ public class PacketProcessor {
         }
 
         // 头部长度错误检查
-        if (ipv4Packet.getHeader().getIhlAsInt() * 4 < 20) {
+        if (ipv4Packet.getHeader().getIhlAsInt() * 4 != 20) {
             return "头部长度错 丢弃";
         }
 
@@ -105,7 +110,8 @@ public class PacketProcessor {
         // 如果所有检查都通过，则根据目标地址转发或接收
         if (routingTable.contains(dstAddr)) {
             IpV4Packet newPacket = modifyIpPacket(ipv4Packet);
-            return String.format("转发 %d 0x%x", newPacket.getHeader().getTtlAsInt(), newPacket.getHeader().getHeaderChecksum());
+            System.out.println(serialNumber);
+            return String.format("正确 转发 %d 0x%x", newPacket.getHeader().getTtlAsInt(), newPacket.getHeader().getHeaderChecksum());
         } else {
             return "正确 接收";
         }
@@ -142,6 +148,7 @@ public class PacketProcessor {
             }
         }
         checksum = (~checksum) & 0xFFFF;
+
 
         // 将计算出的校验和设置回新头部
         newHeader[10] = (byte) (checksum >> 8);
@@ -183,7 +190,8 @@ public class PacketProcessor {
             }
         }
         checkSum = (~checkSum) & 0xFFFF;
-        if(checkSum == ByteArrays.getShort(rawData, 10)){
+        int originSum = ((rawData[10] & 0xFF) << 8) | (rawData[11] & 0xFF);
+        if(checkSum==originSum){
             result = true;
         }
 
